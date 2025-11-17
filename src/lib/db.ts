@@ -3,11 +3,13 @@ import path from 'path';
 import fs from 'fs';
 
 // Define the path for the database
-const dbDir = path.resolve(process.cwd(), 'db');
-const dbPath = path.join(dbDir, 'marketplace.db');
+const dbPath = process.env.DATABASE_PATH || path.join(path.resolve(process.cwd(), 'db'), 'marketplace.db');
 
-// Ensure the directory exists
-fs.mkdirSync(dbDir, { recursive: true });
+// Ensure the directory exists only if using the local default path
+if (!process.env.DATABASE_PATH) {
+  const dbDir = path.dirname(dbPath);
+  fs.mkdirSync(dbDir, { recursive: true });
+}
 
 // Create a new database connection
 // The file will be created if it doesn't exist
