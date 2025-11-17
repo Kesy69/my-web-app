@@ -3,10 +3,10 @@
   "type": "module",
   "packageManager": "pnpm@8.10.0",
   "scripts": {
-    "dev": "concurrently --kill-others \"vite\" \"ts-node server.ts\"",
+    "dev": "concurrently --kill-others \"vite\" \"ts-node api/index.ts\"",
     "build": "pnpm build:server && vite build",
-    "build:server": "tsc server.ts --outDir build",
-    "start": "node build/server.js",
+    "build:server": "tsc api/index.ts --outDir build",
+    "start": "node build/index.js",
     "knex": "knex"
   },
   "dependencies": {
